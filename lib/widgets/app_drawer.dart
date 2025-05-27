@@ -58,6 +58,15 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: const Icon(CupertinoIcons.app_badge_fill , color: Colors.white),
+              title: const Text("About us",
+                  textScaleFactor: 1.2,
+                  style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
               leading: const Icon(CupertinoIcons.mail, color: Colors.white),
               title: const Text("Email me",
                   textScaleFactor: 1.2,

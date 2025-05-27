@@ -3,6 +3,8 @@ import 'package:e_commerce/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -18,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         changeButton = true;
       });
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       await Navigator.pushNamed(context, MyRoutes.homeRoute);
       setState(() {
         changeButton = false;
@@ -39,26 +41,25 @@ class _LoginPageState extends State<LoginPage> {
                 "assets/images/hey.png",
                 fit: BoxFit.cover,
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Text(
                 "Welcome $name",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+                padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
                 child: Column(
                   children: [
                     TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Enter username",
                         labelText: "Username",
                       ),
-                      validator: (String? value) {
+                      validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Username cannot be empty";
                         }
@@ -71,11 +72,11 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextFormField(
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Enter password",
                         labelText: "Password",
                       ),
-                      validator: (String? value) {
+                      validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Password cannot be empty";
                         } else if (value.length < 6) {
@@ -84,24 +85,20 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 40.0),
+                    const SizedBox(height: 40.0),
                     Material(
                       color: context.theme.colorScheme.primary,
-                      borderRadius:
-                      BorderRadius.circular(changeButton ? 50 : 8),
+                      borderRadius: BorderRadius.circular(changeButton ? 50 : 8),
                       child: InkWell(
                         onTap: () => moveToHome(context),
                         child: AnimatedContainer(
-                          duration: Duration(seconds: 1),
+                          duration: const Duration(seconds: 1),
                           width: changeButton ? 50 : 150,
                           height: 50,
                           alignment: Alignment.center,
                           child: changeButton
-                              ? Icon(
-                            Icons.done,
-                            color: Colors.white,
-                          )
-                              : Text(
+                              ? const Icon(Icons.done, color: Colors.white)
+                              : const Text(
                             "Login",
                             style: TextStyle(
                                 color: Colors.white,
@@ -109,6 +106,16 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 18),
                           ),
                         ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, MyRoutes.signupRoute);
+                      },
+                      child: const Text(
+                        "Don't have an account? Sign Up",
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],

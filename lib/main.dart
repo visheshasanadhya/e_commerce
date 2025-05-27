@@ -6,6 +6,7 @@ import 'package:e_commerce/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'pages/home_page.dart';
 import 'widgets/themes.dart';
+import 'package:e_commerce/pages/signup_page.dart';
 
 void main() {
   runApp(VxState(store: MyStore(), child: MyApp()));
@@ -21,10 +22,12 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.lightTheme(context),
       darkTheme: MyTheme.darkTheme(context),
       debugShowCheckedModeBanner: false,
-      initialRoute: MyRoutes.homeRoute,
+      //initialRoute: MyRoutes.homeRoute,
       routes: {
         "/": (context) => LoginPage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
+        MyRoutes.signupRoute: (context) => SignUpPage(),
+
         MyRoutes.homeRoute: (context) => HomePage(),
         //MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.cartRoute: (context) => CartPage(),

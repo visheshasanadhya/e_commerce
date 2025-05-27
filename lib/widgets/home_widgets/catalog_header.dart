@@ -22,7 +22,7 @@ class CatalogHeader extends StatelessWidget {
           children: [
             "Catalog App"
                 .text
-                .xl5
+                .xl4
                 .bold
                 .color(context.theme.colorScheme.secondary)
                 .make(),

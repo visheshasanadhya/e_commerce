@@ -15,6 +15,7 @@ dependencies:
   http: ^1.4.0
   velocity_x: ^4.3.1
   cached_network_image: ^3.2.3
+  url_launcher: ^6.3.1
 
 
 

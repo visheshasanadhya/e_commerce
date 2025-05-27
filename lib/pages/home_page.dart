@@ -8,11 +8,13 @@ import 'package:e_commerce/utils/routes.dart';
 import 'package:e_commerce/widgets/home_widgets/catalog_header.dart';
 import 'package:e_commerce/widgets/home_widgets/catalog_list.dart';
 import 'package:e_commerce/widgets/app_drawer.dart';
-import 'package:e_commerce/widgets/drawer.dart';
+import 'package:e_commerce/widgets/footer.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -25,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     final catalogJson =
     await rootBundle.loadString("assets/files/catalog.json");
     final decodedData = jsonDecode(catalogJson);
@@ -41,29 +43,23 @@ class _HomePageState extends State<HomePage> {
     final _cart = (VxState.store as MyStore).cart;
 
     return Scaffold(
-      //drawer: MyDrawer(),
-      drawer: const AppDrawer(),  // Use the drawer widget here
       backgroundColor: context.canvasColor,
+      drawer: const AppDrawer(),
       floatingActionButton: VxBuilder(
         mutations: {AddMutation, RemoveMutation},
-        builder: (BuildContext ctx, _, __) {
-          return FloatingActionButton(
-            onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
-            backgroundColor: context.theme.colorScheme.primary,
-            child: const Icon(
-              CupertinoIcons.cart,
-              color: Colors.white,
-            ),
-          ).badge(
-            color: Vx.gray200,
-            size: 22,
-            count: _cart.items.length,
-            textStyle: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          );
-        },
+        builder: (context, _, __) => FloatingActionButton(
+          onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+          backgroundColor: context.theme.colorScheme.primary,
+          child: const Icon(CupertinoIcons.cart, color: Colors.white),
+        ).badge(
+          color: Vx.gray200,
+          size: 22,
+          count: _cart.items.length,
+          textStyle: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: SafeArea(
         child: Container(
@@ -72,10 +68,21 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CatalogHeader(),
-              if (CatalogModel.items.isNotEmpty)
-                CatalogList().py16().expand()
-              else
-                const CircularProgressIndicator().centered().expand(),
+              10.heightBox,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      if (CatalogModel.items.isNotEmpty)
+                        CatalogList()
+                      else
+                        const CircularProgressIndicator().centered().py16(),
+                      20.heightBox,
+                      const AppFooter(),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
